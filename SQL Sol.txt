@@ -1,0 +1,99 @@
+QUESTION 3
+SELECT * FROM customer
+
+QUESTION 4
+SELECT cust_no, cust_city, FROM customer
+
+QUESTION 5
+SELECT cust_frame + '/+ cust_lname AS full_name
+FROM customer WHERE cust_city ='Durban';
+
+QUESTION 6
+SELECT * FROM customer
+WHERE cust_lname LIKE 'B'
+OR cust_lname LIKE 'b%';
+
+QUESTION 7
+SELCT cust_lname FROM customer
+WHERE cust_postcode LIKE '3%1'
+
+QUESTION 8
+SELECT cust_lname FROM customer
+WHERE cust_postcode IN ('0001', '4000', '8000');
+
+QUESTION 9
+SELECT * FROM invoice
+WHERE inv_amt BETWEEN 1000.00 AND 5000.00;
+
+CUSTOMER 10
+SELECT MIN(inv_amt ) FROM invoice;
+
+CUSTOMER 11
+SELECT MAX(inv_amt) FROM invoice
+WHERE cust_no =12355
+
+QUESTION 12
+SELECT SUM(inv_amt), AVG(inv amt) FROM invoice
+WHERE cust_no =12354;
+
+QUESTION 13
+SELECT COUNT(*) AS inv_2009 FROM invoice
+WHERE inv_date BETWEEN '01-01-2009' AND '12-31-2009';
+
+
+-----------------------------EXERCISE 2----------------------------
+
+QUESTION 1
+SELECT firstname lastname , address FROM customers
+WHERE country = 'USA' ORDER BY lastname ASC
+
+QUESTION 2
+SELECT customerid , lastname, firstname FROM customers
+ORDER BY lastname ASC, firstname DESC;
+
+QUESTION 3
+SELECT 	customerid , SUM(shipping) AS 'Total Shipping > 3' FROM orders
+GROUP BY customerid
+HAVING COUNT(*) >=3;
+
+
+QUESTION 5
+SELECT productid, SUM (quantity) AS 'Total Product ID Quantity'
+FROM orderitems
+GROUP BY productid;
+
+QUESTION 6
+SELECT country, COUNT(*) AS 'No. of Customers by Country'
+FROM customers
+GROUP BY country;
+
+QUESTION 7
+SELECT productid, productname, producttypename
+FROM products, producttypes
+WHERE product.producttypeid = producttypes.producttypeid;
+
+QUESTION 8
+SELECT productid, productname, producttypename
+FROM products , producttypes
+WHERE products.producttypeid= producttypes.producttypeid
+AND products.productprice > 29.95;
+
+QUESTION 9
+SELECT customers.customerID, COUNT(*) AS 'Number Of Purchases'
+FROM customers, orders
+WHERE customers.customerid=orders.customerid
+AND country ='CA'
+GROUP BY customer.customeridHAVING COUNT(customers.customerid)>2;
+
+
+--------------------------EXERCISE 3------------------------
+QUESTION 1
+SELECT * FROM (SELECT * FROM customer
+WHERE customer.cust_limit> (Select AVG(customer.cust_limit) From Customer)
+
+QUESTION 2
+SELECT * FROM (SELECT * FROM customer
+WHERE customer.cust_limit>(Select AVG (customer.cust_limit)From Customer))As Above_Average
+Where cust_title ='Mr';
+
+
